@@ -1,8 +1,8 @@
 package com.unis.obj;
 
 /**
- * @author: lengyhua
- * @create at: 2020/2/9 17:15
+ * @author lengyhua
+ * create at: 2020/2/9 17:15
  * @description:
  */
 public class Accumulator {

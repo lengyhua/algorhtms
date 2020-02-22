@@ -3,12 +3,18 @@ package com.unis;
 import com.unis.alg.VisualCounter;
 import com.unis.chapter1.Ex_1_2_1;
 import com.unis.chapter1.Ex_1_2_6;
+import com.unis.chapter1.Parentheses;
+import com.unis.chapter1.ParenthesesPolish;
+import com.unis.in.In;
 import com.unis.obj.Point2D;
 import com.unis.utils.StdDraw;
+import com.unis.utils.StdIn;
 import com.unis.utils.StdOut;
 import com.unis.utils.StdRandom;
 
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * Hello world!
@@ -16,8 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class App {
     public static void main( String[] args ) {
-        VisualCounter visualCounter = new VisualCounter(10000, 10);
-        visualCounter.draw();
+        ParenthesesPolish.polish(new In());
     }
 
 
@@ -64,4 +69,38 @@ public class App {
         }
         return r;
     }
+}
+
+class Iter<T> implements Iterable<T>{
+
+    private int N;
+    private T[] data = (T[]) new Object[1];
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayIterator();
+    }
+
+    public void add(T t) {
+        if(N == data.length) {
+            T[] temp = (T[]) new Object[N * 2];
+            System.arraycopy(data, 0, temp, 0, N);
+            data = temp;
+        }
+        data[N++] = t;
+    }
+
+    private class ArrayIterator implements Iterator<T>{
+        private int i;
+        @Override
+        public boolean hasNext() {
+            return i < N;
+        }
+
+        @Override
+        public T next() {
+            return data[i++];
+        }
+    }
+
 }
